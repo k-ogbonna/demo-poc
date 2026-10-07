@@ -9,8 +9,8 @@ pool:
 
 variables:
   imageName: poc-web
-  dockerHubUser: kceecool   
-  jenkinsUrl: http://localhost:8081   
+  dockerHubUser:    
+  jenkinsUrl:    
 
 stages:
   - stage: StaticAnalysis
@@ -42,7 +42,7 @@ stages:
             env:
               JENKINS_URL: $(jenkinsUrl)
               JENKINS_USER: $(JENKINS_USER)
-              JENKINS_TOKEN: $(JENKINS_TOKEN)      # secret pipeline variable
+              JENKINS_TOKEN: $(JENKINS_TOKEN)      
               COMMIT_SHA: $(Build.SourceVersion)
               IMAGE_NAME: $(imageName)
               STAGING: $(Build.ArtifactStagingDirectory)
