@@ -19,7 +19,7 @@ pipeline {
 
     stage('Unit test') {
       steps {
-        sh 'sh ./test.sh'
+        sh 'sh test.sh'
       }
     }
 
