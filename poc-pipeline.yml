@@ -10,7 +10,7 @@ pool:
 variables:
   imageName: poc-web
   dockerHubUser:    
-  jenkinsUrl:    
+  jenkinsUrl: https://63.183.95.213.sslip.io   
 
 stages:
   - stage: StaticAnalysis
@@ -31,8 +31,6 @@ stages:
   - stage: JenkinsBuild
     displayName: Build, test, image (Jenkins)
     dependsOn: StaticAnalysis
-    pool:
-      name: JenkinsAgentPool
     jobs:
       - job: RunJenkins
         steps:
