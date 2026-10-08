@@ -9,7 +9,7 @@ pool:
 
 variables:
   imageName: poc-web
-  dockerHubUser:    
+  #dockerHubUser:    
   jenkinsUrl: https://63.183.95.213.sslip.io   
 
 stages:
@@ -63,23 +63,23 @@ stages:
                 --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1
             displayName: Trivy scan (fail on HIGH/CRITICAL)
 
-  - stage: Push
-    displayName: Push to registry
-    dependsOn: Scan
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-    jobs:
-      - job: PushImage
-        steps:
-          - download: current
-            artifact: image
-          - script: docker load -i $(Pipeline.Workspace)/image/$(imageName).tar
-            displayName: Load image
-          - task: Docker@2
-            displayName: Docker Hub login
-            inputs:
-              command: login
-              containerRegistry: dockerhub-connection
-          - script: |
-              docker tag $(imageName):$(Build.SourceVersion) $(dockerHubUser)/$(imageName):$(Build.BuildId)
-              docker push $(dockerHubUser)/$(imageName):$(Build.BuildId)
-            displayName: Tag and push
+ # - stage: Push
+  #    displayName: Push to registry
+    #  dependsOn: Scan
+   #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    #  jobs:
+      #  - job: PushImage
+       # steps:
+        #  - download: current
+         #   artifact: image
+        # - script: docker load -i $(Pipeline.Workspace)/image/$(imageName).tar
+         #   displayName: Load image
+         # - task: Docker@2
+           # displayName: Docker Hub login
+           # inputs:
+          #    command: login
+            #  containerRegistry: dockerhub-connection
+         # - script: |
+          #    docker tag $(imageName):$(Build.SourceVersion) $(dockerHubUser)/$(imageName):$(Build.BuildId)
+           #   docker push $(dockerHubUser)/$(imageName):$(Build.BuildId)
+           # displayName: Tag and push
