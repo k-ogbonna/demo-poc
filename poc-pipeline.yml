@@ -3,14 +3,13 @@ trigger:
   branches:
     include: [main]
 
-# Self-hosted pool so the agent can reach Jenkins on localhost:8081
 pool:
   vmImage: ubuntu-24.04
 
 variables:
   imageName: poc-web
   #dockerHubUser:    
-  jenkinsUrl: https://63.183.95.213.sslip.io   
+  jenkinsUrl: https://54.93.32.248.sslip.io   
 
 stages:
   - stage: StaticAnalysis
